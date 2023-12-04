@@ -1,5 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
+import json
 
 # url = "https://www.wizardingworld.com/discover/books"
 
@@ -20,8 +21,15 @@ soup = BeautifulSoup(src, "lxml")
 # находим все на звания книг и ссылки на них
 all_books_links = soup.find_all(class_="ProductCard_link__z-ZoA")
 
+all_books_links_dict = {}
 for i, link in enumerate(all_books_links):
     link_text = link.text  # название книги
     link_href = link.get("href")  # ccылка на книгу
     print(i)  # нумерация книг начинается с нуля
     print(f"{link_text.strip()}: {link_href}")
+
+    all_books_links_dict[link_text] = link_href
+
+# сохраняем полученные названия и ссылки в словарь.json
+with open('all_books_links_dict.json', 'w') as file:
+    json.dump(all_books_links_dict, file, indent=4, ensure_ascii=False)
