@@ -28,7 +28,7 @@ for i, link in enumerate(all_books_links):
     print(i)  # нумерация книг начинается с нуля
     print(f"{link_text.strip()}: {link_href}")
 
-    all_books_links_dict[link_text] = link_href
+    all_books_links_dict[link_text.strip()] = link_href
 
 # сохраняем полученные названия и ссылки в словарь.json
 with open('all_books_links_dict.json', 'w') as file:
