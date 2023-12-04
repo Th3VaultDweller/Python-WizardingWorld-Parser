@@ -20,8 +20,8 @@ soup = BeautifulSoup(src, "lxml")
 # находим все на звания книг и ссылки на них
 all_books_links = soup.find_all(class_="ProductCard_link__z-ZoA")
 
-for link in all_books_links:
+for i, link in enumerate(all_books_links):
     link_text = link.text  # название книги
     link_href = link.get("href")  # ccылка на книгу
-
+    print(i)  # нумерация книг начинается с нуля
     print(f"{link_text.strip()}: {link_href}")
