@@ -1,6 +1,7 @@
+import json
+
 import requests
 from bs4 import BeautifulSoup
-import json
 
 # url = "https://www.wizardingworld.com/discover/books"
 
@@ -28,10 +29,11 @@ for i, link in enumerate(all_books_links):
     print(i)  # нумерация книг начинается с нуля
     print(f"{link_text.strip()}: {link_href}")
 
+    # ключ - название книги, значение - ссылка на книгу
     all_books_links_dict[link_text.strip()] = link_href
 
 # сохраняем полученные названия и ссылки в словарь.json
 # indent=4 - необходимый отступ
 # ensure_ascii=False не экранирует символы и помогает в работе с кириллицей
-with open('all_books_links_dict.json', 'w') as file:
+with open("all_books_links_dict.json", "w") as file:
     json.dump(all_books_links_dict, file, indent=4, ensure_ascii=False)
