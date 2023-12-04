@@ -41,8 +41,18 @@ soup = BeautifulSoup(src, "lxml")
 with open("all_books_links_dict.json") as file:
     all_books = json.load(file)
 
+count = 0
 for book_name, book_href in all_books.items():
-    rep = [",", ", ", "-", "'", ":"]
-    for item in rep:
-        if item in book_name:
-            book_name = book_name.replace(item, "_")
+    if count == 0:
+        rep = [",", ", ", "-", "'", ":", " "]
+        for item in rep:
+            if item in book_name:
+                book_name = book_name.replace(item, "_")
+
+        req = requests.get(url=book_href, headers=headers)
+        src = req.text
+
+        with open(f"data/{count}_{book_name}.html", "w") as file:
+            file.write(src)
+
+        count += 1
