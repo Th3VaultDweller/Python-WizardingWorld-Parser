@@ -1,4 +1,6 @@
 import json
+import random
+import time
 
 import requests
 from bs4 import BeautifulSoup
@@ -75,5 +77,7 @@ for book_name, book_href in all_books.items():
     if iteration_count == 0:
         print(f"Работа завершена.")
         break
+    
+    time.sleep(random.randrange(2, 4))
 
     print(f"Осталось итераций: {iteration_count}")
