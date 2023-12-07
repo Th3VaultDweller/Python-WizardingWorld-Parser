@@ -44,37 +44,37 @@ with open("all_books_links_dict.json") as file:
 iteration_count = int(len(all_books)) - 1
 count = 0
 for book_name, book_href in all_books.items():
-    if count == 0:
-        rep = [",", ", ", "-", "'", ":", " "]
-        for item in rep:
-            if item in book_name:
-                book_name = book_name.replace(item, "_")
 
-        req = requests.get(url=book_href, headers=headers)
-        src = req.text
+    rep = [",", ", ", "-", "'", ":", " "]
+    for item in rep:
+        if item in book_name:
+            book_name = book_name.replace(item, "_")
 
-        with open(f"data/{count}_{book_name}.html", "w") as file:
-            file.write(src)
+    req = requests.get(url=book_href, headers=headers)
+    src = req.text
 
-        # with open(f"data/{count}_{book_name}.html") as file:
-        #     src = file.read()
+    with open(f"data/{count}_{book_name}.html", "w") as file:
+        file.write(src)
 
-        # soup = BeautifulSoup(src, "lxml")
+    # with open(f"data/{count}_{book_name}.html") as file:
+    #     src = file.read()
 
-        # # собираем аннотации книг
-        # book_annotation = soup.find(
-        #     "div", class_="ArticleGambit_default__3mOC- ArticleGambit_left__qElyK"
-        # )
-        # print(book_annotation)
+    # soup = BeautifulSoup(src, "lxml")
 
-        count += 1
+    # # собираем аннотации книг
+    # book_annotation = soup.find(
+    #     "div", class_="ArticleGambit_default__3mOC- ArticleGambit_left__qElyK"
+    # )
+    # print(book_annotation)
 
-        print(f"# Итерация {count}. {book_name} записан...")
+    count += 1
 
-        iteration_count = iteration_count - 1
+    print(f"# Итерация {count}. {book_name} записан...")
 
-        if iteration_count == 0:
-            print(f"Работа завершена.")
-            break
+    iteration_count = iteration_count - 1
 
-        print(f"Осталось итераций: {iteration_count}")
+    if iteration_count == 0:
+        print(f"Работа завершена.")
+        break
+
+    print(f"Осталось итераций: {iteration_count}")
