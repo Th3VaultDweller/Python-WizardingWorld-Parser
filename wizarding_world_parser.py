@@ -41,6 +41,7 @@ soup = BeautifulSoup(src, "lxml")
 with open("all_books_links_dict.json") as file:
     all_books = json.load(file)
 
+iteration_count = int(len(all_books)) - 1
 count = 0
 for book_name, book_href in all_books.items():
     if count == 0:
@@ -52,18 +53,28 @@ for book_name, book_href in all_books.items():
         req = requests.get(url=book_href, headers=headers)
         src = req.text
 
-        # with open(f"data/{count}_{book_name}.html", "w") as file:
-        #     file.write(src)
+        with open(f"data/{count}_{book_name}.html", "w") as file:
+            file.write(src)
 
-        with open(f"data/{count}_{book_name}.html") as file:
-            src = file.read()
+        # with open(f"data/{count}_{book_name}.html") as file:
+        #     src = file.read()
 
-        # собираем аннотации книг
-        book_annotation = soup.find(
-            "section",
-            class_="ArticleGambit_gambit__1w6yf ArticleGambit_default__3mOC- ArticleGambit_left__qElyK",
-        )
+        # soup = BeautifulSoup(src, "lxml")
 
-        print(book_annotation)
+        # # собираем аннотации книг
+        # book_annotation = soup.find(
+        #     "div", class_="ArticleGambit_default__3mOC- ArticleGambit_left__qElyK"
+        # )
+        # print(book_annotation)
 
         count += 1
+
+        print(f"# Итерация {count}. {book_name} записан...")
+
+        iteration_count = iteration_count - 1
+
+        if iteration_count == 0:
+            print(f"Работа завершена.")
+            break
+
+        print(f"Осталось итераций: {iteration_count}")
