@@ -44,7 +44,6 @@ with open("all_books_links_dict.json") as file:
 iteration_count = int(len(all_books)) - 1
 count = 0
 for book_name, book_href in all_books.items():
-
     rep = [",", ", ", "-", "'", ":", " "]
     for item in rep:
         if item in book_name:
